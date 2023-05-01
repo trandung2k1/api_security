@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  backend:
+    container_name: api_security
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+    env_file: .env
+    volumes:
+      - "./src:/app/src"
+      - /app/node_modules
+    networks:
+      - trandung
+networks:
+  trandung:
