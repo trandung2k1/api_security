@@ -7,6 +7,7 @@ import needle from 'needle';
 import rateLimit, { RateLimitRequestHandler } from 'express-rate-limit';
 import apicache from 'apicache';
 import url from 'url';
+import { errorHandler, notFound } from './errorHandler';
 dotenv.config();
 interface IQuery {
     q?: string;
@@ -47,6 +48,8 @@ app.get('/welcome', (req: Request, res: Response) => {
         message: 'Welcome to the server 👋👋👋',
     });
 });
+app.use(notFound);
+app.use(errorHandler);
 app.listen(port, () => {
     console.log(`Server listen on http://localhost:${port}`);
 });
